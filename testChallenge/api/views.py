@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .models import Client, Room, Reserve, Payment, Factura
 from .serializers import ClientSerializer, ReserveSerializer, RoomSerializer, PayementSerializer, FacturaSerializer
+from types import SimpleNamespace
 
 # Create your controllers endpoints here.
 
@@ -41,7 +42,8 @@ class ClienteViewController(APIView):
                 nit=toJsonData['nit'],
                 nationality=toJsonData['nationality'],
             )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = PayementSerializer(instance=client).data
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
@@ -98,7 +100,8 @@ class RoomViewController(APIView):
                 price=toJsonData['price'],
                 status=toJsonData['status'],
             )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = PayementSerializer(instance=room).data
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
@@ -149,7 +152,8 @@ class ReserveViewController(APIView):
                 refCliente_id=toJsonData['refCliente_id'],
                 refRoom_id=toJsonData['refRoom_id'],
             )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = PayementSerializer(instance=reserve).data
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
@@ -198,7 +202,8 @@ class FacturaViewController(APIView):
                 razonSocial=toJsonData['razonSocial'],
                 expedidoDate=toJsonData['expedidoDate'],
             )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = PayementSerializer(instance=factura).data
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
@@ -223,7 +228,26 @@ class FacturaViewController(APIView):
 
 class PaymentViewController(APIView):
 
-    def get(self, request, id=0):
+    def get(self, request, id=0, paymentId=0):
+        key_a = request.GET['paymentId']
+        print(key_a)
+        if (key_a):
+            payment = Payment.objects.get(id=key_a)
+            if(payment):
+                serializer = PayementSerializer(instance=payment) # pago 
+                reserve = Reserve.objects.get(id=serializer.data.get("refReserve_id")) # Reserva 
+                rserializer = ReserveSerializer(instance=reserve)
+                
+                factura = Factura.objects.get(id=serializer.data.get("refFactura_id")) # Factura
+                fserializer = FacturaSerializer(instance=factura)
+                cliente = Client.objects.get(id=rserializer.data.get("refCliente_id")) # Cliente
+                cserializer = ClientSerializer(instance=cliente)
+                cuarto = Room.objects.get(id=rserializer.data.get("refRoom_id")) # cuarto
+                cuserializer = RoomSerializer(instance=cuarto)
+                return Response({ "payment": serializer.data, "reserva": rserializer.data, "factura": fserializer.data, "cliente": cserializer.data, "cuarto": cuserializer.data }, status=status.HTTP_200_OK)
+            else:
+                return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
+
         if(id > 0):
             payments =  list(Payment.objects.filter(id=id).values())
             if(len(payments) > 0):
@@ -246,7 +270,8 @@ class PaymentViewController(APIView):
                 refFactura_id=toJsonData['refFactura_id'],
                 refReserve_id=toJsonData['refReserve_id'],
             )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = PayementSerializer(instance=payment).data
+            return Response(response, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
