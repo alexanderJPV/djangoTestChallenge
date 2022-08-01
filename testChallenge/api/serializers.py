@@ -23,8 +23,8 @@ class ReserveSerializer(serializers.ModelSerializer):
 
 class PayementSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Reserve
-        fields = ["amount", "methodPay", "refReserve", "refFactura"]
+        model = Payment
+        fields = ["amount", "methodPay"]
 
 class FacturaSerializer(serializers.ModelSerializer):
     class Meta:

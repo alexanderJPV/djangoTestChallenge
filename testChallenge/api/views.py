@@ -4,15 +4,10 @@ from django.http import JsonResponse,  HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .models import Client
-from .models import Room
-from .models import Reserve
-from .models import Payment
-from .models import Factura
-from .serializers import ClientSerializer, ReserveSerializer
-from .serializers import RoomSerializer
+from .models import Client, Room, Reserve, Payment, Factura
+from .serializers import ClientSerializer, ReserveSerializer, RoomSerializer, PayementSerializer, FacturaSerializer
 
-# Create your views here.
+# Create your controllers endpoints here.
 
 class ClienteViewController(APIView):
 
@@ -173,6 +168,102 @@ class ReserveViewController(APIView):
         reserves = list(Reserve.objects.filter(id=id).values())
         if len(reserves) > 0:
             Reserve.objects.filter(id=id).delete()
+            return Response({"message":"success item was delete"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message":"error item was not delete"}, status=status.HTTP_400_BAD_REQUEST)
+
+class FacturaViewController(APIView):
+
+    def get(self, request, id=0):
+        if(id > 0):
+            facturas =  list(Factura.objects.filter(id=id).values())
+            if(len(facturas) > 0):
+                serializer = FacturaSerializer(facturas, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            facturas =  Factura.objects.all().values()
+            serializer = FacturaSerializer(facturas, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        toJsonData = json.loads(request.body)
+        serializer = FacturaSerializer(data=toJsonData)
+        if serializer.is_valid():
+            factura = Factura.objects.create(
+                nit=toJsonData['nit'],
+                razonSocial=toJsonData['razonSocial'],
+                expedidoDate=toJsonData['expedidoDate'],
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, id):
+        toJsonData = json.loads(request.body)
+        facturas = list(Factura.objects.filter(id=id).values())
+        if len(facturas) > 0:
+            factura = Factura.objects.get(id=id)
+            factura.nit = toJsonData['nit']
+            factura.razonSocial = toJsonData['razonSocial']
+            factura.expedidoDate = toJsonData['expedidoDate']
+            factura.save()
+            return Response({"message":"success item was update"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
+    def delete(self, request, id):
+        facturas = list(Factura.objects.filter(id=id).values())
+        if len(facturas) > 0:
+            Factura.objects.filter(id=id).delete()
+            return Response({"message":"success item was delete"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message":"error item was not delete"}, status=status.HTTP_400_BAD_REQUEST)
+
+class PaymentViewController(APIView):
+
+    def get(self, request, id=0):
+        if(id > 0):
+            payments =  list(Payment.objects.filter(id=id).values())
+            if(len(payments) > 0):
+                serializer = PayementSerializer(payments, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            payments =  Payment.objects.all().values()
+            serializer = PayementSerializer(payments, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        toJsonData = json.loads(request.body)
+        serializer = PayementSerializer(data=toJsonData)
+        if serializer.is_valid():
+            payment = Payment.objects.create(
+                amount=toJsonData['amount'],
+                methodPay=toJsonData['methodPay'],
+                refFactura_id=toJsonData['refFactura_id'],
+                refReserve_id=toJsonData['refReserve_id'],
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, id):
+        toJsonData = json.loads(request.body)
+        payments = list(Payment.objects.filter(id=id).values())
+        if len(payments) > 0:
+            payment = Payment.objects.get(id=id)
+            payment.amount = toJsonData['amount']
+            payment.methodPay = toJsonData['methodPay']
+            payment.refFactura_id = toJsonData['refFactura_id']
+            payment.refReserve_id = toJsonData['refReserve_id']
+            payment.save()
+            return Response({"message":"success item was update"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
+    def delete(self, request, id):
+        payments = list(Payment.objects.filter(id=id).values())
+        if len(payments) > 0:
+            Payment.objects.filter(id=id).delete()
             return Response({"message":"success item was delete"}, status=status.HTTP_200_OK)
         else:
             return Response({"message":"error item was not delete"}, status=status.HTTP_400_BAD_REQUEST)
