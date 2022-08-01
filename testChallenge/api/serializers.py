@@ -15,16 +15,14 @@ class RoomSerializer(serializers.ModelSerializer):
         fields = ["codigo", "nroBeds", "price", "status"]
 
 class ReserveSerializer(serializers.ModelSerializer):
-    # refCliente = serializers.RelatedField(source='Reserve', read_only=True)
-    # refRoom = serializers.RelatedField(source='Reserve', read_only=True)
     class Meta:
         model = Reserve
-        fields = ["status", "startDate", "endDate"]
+        fields = ["status", "startDate", "endDate", "refCliente_id", "refRoom_id"]
 
 class PayementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        fields = ["amount", "methodPay"]
+        fields = ["amount", "methodPay", "refReserve_id", "refFactura_id"]
 
 class FacturaSerializer(serializers.ModelSerializer):
     class Meta:
