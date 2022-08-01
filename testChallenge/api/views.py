@@ -11,6 +11,8 @@ from .serializers import ClientSerializer, ReserveSerializer, RoomSerializer, Pa
 
 class ClienteViewController(APIView):
 
+    def greeting(request):
+        return HttpResponse("Hello from two path again...........")
     def get(self, request, id=0):
         if(id > 0):
             clients =  list(Client.objects.filter(id=id).values())
