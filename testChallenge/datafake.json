@@ -1,0 +1,327 @@
+[
+    {
+        "model": "api.client",
+        "pk": 1,
+        "fields": {
+            "firstName":"Teddi",
+            "lastName":"Scoggan",
+            "age":23,
+            "ci":495122,
+            "phone":23232,
+            "email":"tscoggan0@census.gov",
+            "addres":"869 Schmedeman Lane",
+            "nit":23323,
+            "nationality":"Thailand"
+        }
+    },
+    {
+        "model": "api.client",
+        "pk": 2,
+        "fields": {
+            "firstName":"Kerry",
+            "lastName":"Waleran",
+            "age":34,
+            "ci":107892,
+            "phone":58960,
+            "email":"kwaleran1@apple.com",
+            "addres":"46320 Kensington Avenue",
+            "nit":27206,
+            "nationality":"Egypt"
+        }
+    },
+    {
+        "model": "api.client",
+        "pk": 3,
+        "fields": {
+            "firstName":"Bern",
+            "lastName":"Pabst",
+            "age":54,
+            "ci":35121,
+            "phone":857669,
+            "email":"bpabst2@nbcnews.com",
+            "addres":"85 Cody Way",
+            "nit":6597,
+            "nationality":"Portugal"
+        }
+    },
+    {
+        "model": "api.client",
+        "pk": 4,
+        "fields": {
+            "firstName":"Roderigo",
+            "lastName":"Smoth",
+            "age":22,
+            "ci":93234,
+            "phone":772524,
+            "email":"rsmoth3@networkadvertising.org",
+            "addres":"532 Anhalt Hill",
+            "nit":323232,
+            "nationality":"China"
+        }
+    },
+    {
+        "model": "api.client",
+        "pk": 5,
+        "fields": {
+            "firstName":"Ricoriki",
+            "lastName":"Birks",
+            "age":55,
+            "ci":35993,
+            "phone":472744,
+            "email":"rbirks4@columbia.edu",
+            "addres":"259 School Junction",
+            "nit":29964,
+            "nationality":"Sweden"
+        }
+    },
+    {
+        "model": "api.room",
+        "pk": 1,
+        "fields": {
+            "codigo":"Z5C04ZZ", 
+            "nroBeds":1, 
+            "price":50,
+            "status":"OCUPADO"
+        }
+    },
+    {
+        "model": "api.room",
+        "pk": 2,
+        "fields": {
+            "codigo":"2W40X5Z",
+            "nroBeds":2,
+            "price":100,
+            "status":"RESERVADO"
+        }
+    },
+    {
+        "model": "api.room",
+        "pk": 3,
+        "fields": {
+            "codigo":"027P4ZZ",
+            "nroBeds":3,
+            "price":150,
+            "status":"DISPONIBLE"
+        }
+    },
+    {
+        "model": "api.room",
+        "pk": 4,
+        "fields": {
+            "codigo":"05L30ZZ",
+            "nroBeds":4,
+            "price":200,
+            "status":"OCUPADO"
+        }
+    },
+    {
+        "model": "api.room",
+        "pk": 5,
+        "fields": {
+            "codigo":"0GJ13ZZ",
+            "nroBeds":5,
+            "price":225,
+            "status":"DIPONIBLE"
+        }
+    },
+    {
+        "model": "api.reserve",
+        "pk": 1,
+        "fields": {
+            "status":"PENDIENTE",
+            "startDate":"2021-03-03",
+            "endDate":"2021-03-06",
+            "refCliente_id": 1,
+            "refRoom_id": 1
+        }
+    },
+    {
+        "model": "api.reserve",
+        "pk": 2,
+        "fields": {
+            "status":"PENDIENTE",
+            "startDate":"2021-10-24",
+            "endDate":"2022-05-19",
+            "refCliente_id": 2,
+            "refRoom_id": 2
+        }
+    },
+    {
+        "model": "api.reserve",
+        "pk": 3,
+        "fields": {
+            "status":"PENDIENTE",
+            "startDate":"2022-02-07",
+            "endDate":"2022-06-09",
+            "refCliente_id": 3,
+            "refRoom_id": 3
+        }
+    },
+    {
+        "model": "api.reserve",
+        "pk": 4,
+        "fields": {
+            "status":"PENDIENTE",
+            "startDate":"2021-12-25",
+            "endDate":"2021-12-08",
+            "refCliente_id": 4,
+            "refRoom_id": 4
+        }
+    },
+    {
+        "model": "api.reserve",
+        "pk": 5,
+        "fields": {
+            "status":"PENDIENTE",
+            "startDate":"2021-10-29",
+            "endDate":"2021-11-16",
+            "refCliente_id": 5,
+            "refRoom_id": 5
+        }
+    },
+    {
+        "model": "api.factura",
+        "pk": 1,
+        "fields": {
+            "nit":"234422",
+            "expedidoDate": "2021-11-16",
+            "razonSocial":"Runolfsdottir and Sons"
+        }
+    },
+    {
+        "model": "api.factura",
+        "pk": 2,
+        "fields": {
+            "nit":"23232",
+            "expedidoDate": "2021-11-16",
+            "razonSocial":"Aufderhar-Bogisich"
+        }
+    },
+    {
+        "model": "api.factura",
+        "pk": 3,
+        "fields": {
+            "nit":"23232",
+            "expedidoDate": "2021-11-16",
+            "razonSocial":"Howell-Reichert"
+        }
+    },
+    {
+        "model": "api.factura",
+        "pk": 4,
+        "fields": {
+            "nit":"23232",
+            "expedidoDate": "2021-11-16",
+            "razonSocial":"Kertzmann, Jakubowski and Koch"
+        }
+    },
+    {
+        "model": "api.factura",
+        "pk": 5,
+        "fields": {
+            "nit":"33333",
+            "expedidoDate": "2021-11-16",
+            "razonSocial":"Gerhold, Fritsch and Kilback"
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 1,
+        "fields": {
+            "amount":129.57,
+            "methodPay":"TARJETA",
+            "refFactura_id": 1,
+            "refReserve_id": 1
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 2, 
+        "fields": {
+            "amount":117.37,
+            "methodPay":"TARJETA",
+            "refFactura_id": 2,
+            "refReserve_id": 2
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 3,
+        "fields": {
+            "amount":55.91,
+            "methodPay":"TARJETA",
+            "refFactura_id": 3,
+            "refReserve_id": 3
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 4, 
+        "fields": {
+            "amount":59.02,
+            "methodPay":"EFECTIVO",
+            "refFactura_id": 4,
+            "refReserve_id": 4
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 5,
+        "fields": {
+            "amount":87.35,
+            "methodPay":"EFECTIVO",
+            "refFactura_id": 5,
+            "refReserve_id": 5
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 6,
+        "fields": {
+            "amount":195.96,
+            "methodPay":"EFECTIVO",
+            "refFactura_id": 1,
+            "refReserve_id": 1
+            }
+        },
+    {
+        "model": "api.payment",
+        "pk": 7,
+        "fields": {
+            "amount":171.98,
+            "methodPay":"EFECTIVO",
+            "refFactura_id": 2,
+            "refReserve_id": 2
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 8,
+        "fields": {
+            "amount":61.19,
+            "methodPay":"TRANSFERENCIA",
+            "refFactura_id": 3,
+            "refReserve_id": 3
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 9,
+        "fields": {
+            "amount":110.82,
+            "methodPay":"TRANSFERENCIA",
+            "refFactura_id": 4,
+            "refReserve_id": 4
+        }
+    },
+    {
+        "model": "api.payment",
+        "pk": 10,
+        "fields": {
+            "amount":111.92,
+            "methodPay":"TARJETA",
+            "refFactura_id": 5,
+            "refReserve_id": 5
+        }
+    }
+]

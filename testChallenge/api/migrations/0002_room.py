@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
             name='Room',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('codigo', models.CharField(max_length=255)),
                 ('nroBeds', models.IntegerField()),
                 ('price', models.FloatField()),
                 ('status', models.CharField(max_length=255)),

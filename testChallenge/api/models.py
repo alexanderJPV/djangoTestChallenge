@@ -17,7 +17,7 @@ class Client(models.Model):
     nationality = models.CharField(max_length=255)
 
 class Room(models.Model):
-    codigo = models,CharField(max_length=255)
+    codigo = models.CharField(max_length=255)
     nroBeds = models.IntegerField()
     price = models.FloatField()
     status = models.CharField(max_length=255)
