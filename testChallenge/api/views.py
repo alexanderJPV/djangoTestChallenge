@@ -228,8 +228,9 @@ class FacturaViewController(APIView):
 
 class PaymentViewController(APIView):
 
-    def get(self, request, id=0, paymentId=0):
-        key_a = request.GET['paymentId']
+    def get(self, request, id=0):
+        # key_a = request.GET['paymentId']
+        key_a = request.GET.get('paymentId')
         print(key_a)
         if (key_a):
             payment = Payment.objects.get(id=key_a)
