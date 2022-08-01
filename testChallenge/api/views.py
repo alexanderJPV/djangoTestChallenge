@@ -149,22 +149,23 @@ class ReserveViewController(APIView):
                 status=toJsonData['status'],
                 startDate=toJsonData['startDate'],
                 endDate=toJsonData['endDate'],
-                refCliente=toJsonData['refCliente'],
-                refRoom=toJsonData['refRoom'],
+                refCliente_id=toJsonData['refCliente_id'],
+                refRoom_id=toJsonData['refRoom_id'],
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response({"message":"error item was not create"}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, id):
         toJsonData = json.loads(request.body)
-        rooms = list(Room.objects.filter(id=id).values())
-        if len(rooms) > 0:
-            room = Room.objects.get(id=id)
-            room.codigo = toJsonData['codigo']
-            room.nroBeds = toJsonData['nroBeds']
-            room.price = toJsonData['price']
-            room.status = toJsonData['status']
-            room.save()
+        reserves = list(Reserve.objects.filter(id=id).values())
+        if len(reserves) > 0:
+            reserve = Reserve.objects.get(id=id)
+            reserve.status = toJsonData['status']
+            reserve.startDate = toJsonData['startDate']
+            reserve.endDate = toJsonData['endDate']
+            reserve.refCliente_id = toJsonData['refCliente_id']
+            reserve.refRoom_id = toJsonData['refRoom_id']
+            reserve.save()
             return Response({"message":"success item was update"}, status=status.HTTP_200_OK)
         else:
             return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
