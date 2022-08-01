@@ -56,16 +56,11 @@ class ClienteViewController(APIView):
             client.addres = toJsonData['addres']
             client.nit = toJsonData['nit']
             client.nationality = toJsonData['nationality']
-
-            serializer = ClientSerializer(data=client)
-            print(serializer)
-            print("=================>>>>>>>>>>>")
-            print(serializer.is_valid())
-            if(serializer.is_valid()):
-                client.save()
-                return Response({"message":"success item was update"}, status=status.HTTP_200_OK)
-            else:
-                return Response({"message":"error item was not update"}, status=status.HTTP_400_BAD_REQUEST)
+            # serializer = ClientSerializer(data=client)
+            # print("======================>>>>>>>>>>>>")
+            # print(serializer.is_valid())
+            client.save()
+            return Response({"message":"success item was update"}, status=status.HTTP_200_OK)
         else:
             return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
     def delete(self, request, id):
