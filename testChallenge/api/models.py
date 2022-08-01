@@ -29,7 +29,8 @@ class Reserve(models.Model):
         ELIMINADO = "ELIMINADO"
 
     status = models.CharField(
-        max_length=100,                                                   choices=TransactionStatus.choices,
+        max_length=100,
+        choices=TransactionStatus.choices,
         default=TransactionStatus.PENDIENTE
     )
     startDate = models.DateField()
