@@ -143,13 +143,14 @@ class ReserveViewController(APIView):
 
     def post(self, request):
         toJsonData = json.loads(request.body)
-        serializer = RoomSerializer(data=toJsonData)
+        serializer = ReserveSerializer(data=toJsonData)
         if serializer.is_valid():
-            room = Room.objects.create(
-                codigo=toJsonData['codigo'],
-                nroBeds=toJsonData['nroBeds'],
-                price=toJsonData['price'],
+            reserve = Reserve.objects.create(
                 status=toJsonData['status'],
+                startDate=toJsonData['startDate'],
+                endDate=toJsonData['endDate'],
+                refCliente=toJsonData['refCliente'],
+                refRoom=toJsonData['refRoom'],
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
@@ -168,9 +169,9 @@ class ReserveViewController(APIView):
         else:
             return Response({"message":"error item not found!!!"}, status=status.HTTP_404_NOT_FOUND)
     def delete(self, request, id):
-        rooms = list(Room.objects.filter(id=id).values())
-        if len(rooms) > 0:
-            Room.objects.filter(id=id).delete()
+        reserves = list(Reserve.objects.filter(id=id).values())
+        if len(reserves) > 0:
+            Reserve.objects.filter(id=id).delete()
             return Response({"message":"success item was delete"}, status=status.HTTP_200_OK)
         else:
             return Response({"message":"error item was not delete"}, status=status.HTTP_400_BAD_REQUEST)
