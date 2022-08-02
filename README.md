@@ -23,7 +23,11 @@ _Copia del repositorio **GITLAB** del proyecto en funcionamiento en tu máquina 
  ```
  - `Install python packages`
  ```
-    pip install -r requirements.txt
+    python install -r requirements.txt
+ ```
+ - `Migrate models to DB`
+ ```
+    python manage.py migrate
  ```
 ## 🔧 Runing
 - `Comand to run serve`
