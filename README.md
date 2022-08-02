@@ -27,7 +27,7 @@ _Copia del repositorio **GITLAB** del proyecto en funcionamiento en tu máquina 
  ```
  - `Migrate models to DB`
  ```
-    python manage.py migrate
+    python manage.py migrate.
  ```
 ## 🔧 Runing
 - `Comand to run serve`
